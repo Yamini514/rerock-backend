@@ -1,0 +1,31 @@
+# Environment — secrets live only in .env; .env.example is the tracked template
+.env
+.env.*
+!.env.example
+src/env
+
+# Logs (log/ holds dev-server.log and newrelic_agent.log)
+log/
+*.log
+newrelic_agent.log
+
+# Ruby / Bundler
+.bundle/
+vendor/bundle/
+*.gem
+.byebug_history
+.rspec_status
+
+# Local databases / temp
+*.db
+tmp/
+coverage/
+
+# OS / editor
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Legacy
+./older
