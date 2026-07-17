@@ -50,6 +50,14 @@ class App::Services::Customers < App::Services::Base
     save(c) { return_success(ids: ids) }
   end
 
+  # ── /me/enquiries — the logged-in portal user's own requirement history ──
+  def my_enquiries
+    c = my_customer
+    reqs = c ? Requirement.where(customer_id: c.id, active: true)
+                          .order(Sequel.desc(:created_at)).all.map(&:to_pos) : []
+    return_success(reqs)
+  end
+
   def self.fields
     {
       save: [

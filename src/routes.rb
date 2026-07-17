@@ -64,6 +64,8 @@ class App::Routes < Roda
           r.put(Integer) {|pid| Customers[r, property_id: pid].toggle_saved }
           r.get          { Customers[r].my_saved }
         end
+        # The portal user's own enquiry/requirement history.
+        r.get('enquiries') { Customers[r].my_enquiries }
       end
 
       begin
