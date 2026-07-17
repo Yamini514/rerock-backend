@@ -18,6 +18,10 @@ class App::Models::Property < Sequel::Model
     validates_includes App::Models::MasterDataItem.values_for(:property_statuses, fallback: STATUSES),
                        :status, message: 'is not a valid status'
     validates_unique(:code)
+    %i[price area bedrooms bathrooms].each do |field|
+      value = send(field)
+      errors.add(field, 'cannot be negative') if value && value < 0
+    end
   end
 
   def before_validation

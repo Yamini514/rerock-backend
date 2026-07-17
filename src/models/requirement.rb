@@ -13,6 +13,8 @@ class App::Models::Requirement < Sequel::Model
     if budget_min && budget_max && budget_min > budget_max
       errors.add(:budget_min, 'cannot be greater than budget maximum')
     end
+    errors.add(:budget_min, 'cannot be negative') if budget_min && budget_min < 0
+    errors.add(:budget_max, 'cannot be negative') if budget_max && budget_max < 0
   end
 
   def to_pos
